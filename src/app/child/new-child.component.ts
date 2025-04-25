@@ -3,7 +3,8 @@ import {
     input,
     output,
     signal,
-    effect
+    effect,
+    computed,
 } from '@angular/core';
 
 @Component({
@@ -27,7 +28,8 @@ import {
     `
 })
 export class NewChildComponent {
-    inputData = input<string>(); // functional version of @Input()
+    inputData = input<string | null>(); // functional version of @Input()
+    prev = this.inputData();
     outputData = output<string>(); // functional version of @Output()
     items: { id: number; name: string }[] = [
         {id: 1, name: 'Apple'},
@@ -38,10 +40,17 @@ export class NewChildComponent {
 
     log = signal('');
 
+    paired = computed(() => {
+        const current = this.inputData();
+        const result = [this.prev, current];
+        this.prev = current;
+        return result;
+    });
     constructor() {
         effect(() => {
-            const val = this.inputData();
-            this.log.set(`inputData changed to "${val}"`);
+//            const val = this.inputData();
+            const [previous, current] = this.paired();
+            this.log.set(`inputData changed from "${previous}" to "${current}"`);
         });
     }
 

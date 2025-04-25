@@ -1,16 +1,22 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {ChildComponent} from "../child/child.component";
 
 @Component({
   selector: 'app-parent',
   imports: [
-    ChildComponent
+    ChildComponent,
+    FormsModule // 👈 needed for [(ngModel)]
   ],
   template: `
-    <div>
+    <div style="border: 2px solid #ccc; padding: 16px;">
       <p>Parent Component</p>
+      <label>
+        Enter text to send to child:
+        <input style="padding: 6px; margin-top: 10px; display: block;" [(ngModel)]="parentData" />
+      </label>
       <app-child [inputData]="parentData" (outputData)="handleChildData($event)"></app-child>
-      <p>Received from child: {{ receivedData }}</p>
+      <p><strong>Received from child:</strong> {{ receivedData }}</p>
     </div>
   `,
   standalone: true,
