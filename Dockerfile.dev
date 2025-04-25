@@ -7,7 +7,7 @@ WORKDIR /app
 RUN npm install -g @angular/cli nodemon
 
 # Copy dependency info and install
-COPY package*.json ./
+COPY package.json ./
 RUN npm install
 
 # Copy config files required for ng serve to work
