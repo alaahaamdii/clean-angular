@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {ChildComponent} from "../child/child.component";
+import { ChildComponent } from '../child/child.component';
 
 @Component({
   selector: 'app-parent',
   imports: [
     ChildComponent,
-    FormsModule // 👈 needed for [(ngModel)]
+    FormsModule, // 👈 needed for [(ngModel)]
   ],
   template: `
     <div style="border: 2px solid #ccc; padding: 16px;">
@@ -20,7 +20,7 @@ import {ChildComponent} from "../child/child.component";
     </div>
   `,
   standalone: true,
-  styles: ``
+  styles: ``,
 })
 export class ParentComponent {
   parentData: string = 'Hello from Parent!'; // Data to pass to child
