@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { NewParentComponent } from './parent/new-parent.component';
-import { ResourceComponent } from './custom/newer-movie.component';
+import {Component} from '@angular/core';
+import {MovieListComponent} from "./custom/new-movie.component";
 
 //import {ParentComponent} from "./parent/parent.component";
 
@@ -8,13 +7,14 @@ import { ResourceComponent } from './custom/newer-movie.component';
   selector: 'app-root',
   // imports: [ParentComponent,NewParentComponent],
   // if standalone component or imports: [HttpClientModule] in AppModule
-  imports: [NewParentComponent, ResourceComponent],
+  imports: [MovieListComponent],
   template: `
     <h1>Welcome to {{ title }}!</h1>
-    <app-new-parent></app-new-parent>
+    <!--<app-new-parent></app-new-parent> -->
     <!--<app-parent></app-parent>-->
-    <!--<app-new-movie-list></app-new-movie-list>-->
-    <app-resource></app-resource>  
+    <app-new-movie-list></app-new-movie-list>
+    <!--<app-resource></app-resource>-->
+    <!--<app-movie-list></app-movie-list>-->
   `,
   styles: [],
 })

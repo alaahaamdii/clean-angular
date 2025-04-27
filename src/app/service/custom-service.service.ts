@@ -19,13 +19,19 @@ export class CustomServiceService {
   constructor(private http: HttpClient) {}
 
   getHighRatedMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.apiUrl).pipe(
-      tap(movies => console.log('Fetched Movies:', movies)), // Log the full list
-      map(movies => movies.filter(movie => movie.rating > 8)), // Filter movies with rating > 8
-      tap(highRated => console.log('High Rated Movies:', highRated)), // Log filtered list
+    return this.http.get<Movie[]>(this.apiUrl, { observe: 'response' }).pipe(
+      tap(response => {
+        console.log('Headers:', response.headers);
+        console.log('Response:', response);
+        console.log('Body:', response.body);
+      }),
+      map(response => response.body || []), // Ensure we map the response body correctly
+      tap(movies => console.log('Fetched Movies:', movies)),
+      map(movies => movies.filter(movie => movie.rating > 8)),
+      tap(highRated => console.log('High Rated Movies:', highRated)),
       catchError(error => {
         console.error('Error fetching movies:', error);
-        return of([]); // Return an empty array on error
+        return of([]);
       })
     );
   }
