@@ -7,20 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Example: Add a fake Authorization header
-    const authToken = 'Bearer some-token';
-      console.log('Here is the token: ', authToken);
+    const authToken = 'Bearer some-token'; // Replace with actual token logic
+    console.log('Here is the token!: ', authToken);
+
+    // Store token in localStorage or use it for other logic
+    localStorage.setItem('authToken', authToken);
+
     const authReq = req.clone({
       setHeaders: {
         Authorization: authToken,
       },
     });
 
-    // Pass the cloned request to the next handler
     return next.handle(authReq);
-  }
-
-  ngOnInit() {
-    console.log('Interceptor initialized');
   }
 }

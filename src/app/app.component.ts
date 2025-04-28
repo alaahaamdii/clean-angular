@@ -1,13 +1,8 @@
 import {Component} from '@angular/core';
 import {MovieListComponent} from "./custom/new-movie.component";
 
-//import {ParentComponent} from "./parent/parent.component";
-
 @Component({
   selector: 'app-root',
-  // imports: [ParentComponent,NewParentComponent],
-  // if standalone component or imports: [HttpClientModule] in AppModule
-  imports: [MovieListComponent],
   template: `
     <h1>Welcome to {{ title }}!</h1>
     <!--<app-new-parent></app-new-parent> -->
@@ -17,6 +12,8 @@ import {MovieListComponent} from "./custom/new-movie.component";
     <!--<app-movie-list></app-movie-list>-->
   `,
   styles: [],
+  imports: [MovieListComponent],
+  standalone: true,
 })
 export class AppComponent {
   title = 'my-app';
