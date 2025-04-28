@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: JSONPlaceholder Todo API
+  version: 1.0.0
+
+servers:
+  - url: https://jsonplaceholder.typicode.com
+
+paths:
+  /todos/{id}:
+    get:
+      summary: Get a Todo by ID
+      operationId: getTodoById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+components:
+  schemas:
+    Todo:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: ID of the user who owns the todo
+        id:
+          type: integer
+          description: Unique identifier for the todo
+        title:
+          type: string
+          description: Title of the todo
+      required:
+        - userId
+        - id
+        - title
