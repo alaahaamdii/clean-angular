@@ -22,6 +22,7 @@ export class OpenAIGenComponent {
     this.openAi.getTodoById(1).subscribe({
       next: (data: Todo) => (this.todo = data),
       error: (err: any) => console.error(err),
+      complete: () => console.log('Complete!')
     });
   }
 }
